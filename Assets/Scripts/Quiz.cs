@@ -7,17 +7,19 @@ using UnityEngine.UI;
 public class Quiz : MonoBehaviour
 {
     [Header("Questions")]
-    [SerializeField] List<QuestionSO> questions = new List<QuestionSO>();
+
     [SerializeField] TextMeshProUGUI questionText;
+    [SerializeField] List<QuestionSO> questions = new List<QuestionSO>();
+    
     QuestionSO currentQuestion;
 
     [Header("Answers")]
     [SerializeField] GameObject[] answerButtons;
     int correctAnswerIndex;
-    bool hasAnswerdEarly = true;
+    bool hasAnsweredEarly = true;
 
     [Header("Button Colors")]
-    [SerializeField ]Sprite defaultAnswerSprite;
+    [SerializeField] Sprite defaultAnswerSprite;
     [SerializeField] Sprite correctAnswerSprite;
     [SerializeField] Sprite wrongAnswerSprite;
 
@@ -37,26 +39,30 @@ public class Quiz : MonoBehaviour
     {
         timer = FindObjectOfType<Timer>();
         scoreKeeper = FindObjectOfType<ScoreKeeper>();
+
         progressBar.maxValue = questions.Count;
         progressBar.value = 0;
     }
 
-    private void Update()
-    {
-        timerImage.fillAmount = timer.fillFraction;
+ 
 
-        if(timer.loadNextQuestion)
+    void Update()
+    {
+        
+        timerImage.fillAmount = timer.fillFraction;
+        
+        if (timer.loadNextQuestion)
         {
             if (progressBar.value == progressBar.maxValue)
             {
                 isComplete = true;
                 return;
             }
-            hasAnswerdEarly = false;
+            hasAnsweredEarly = false;
             GetNextQuestion();
             timer.loadNextQuestion = false;
         }
-        else if(!hasAnswerdEarly && !timer.isAnsweringQuestion)
+        else if( !hasAnsweredEarly && !timer.isAnsweringQuestion)
         {
             DisplayAnswer(-1); //tuka se stava -1 za da ne se poklopi slucajno so nekoj od nasite indexi 0,1,2 ili  3
             SetButtonState(false);
@@ -64,13 +70,13 @@ public class Quiz : MonoBehaviour
     }
     public void OnAnswerSelected(int index)
     {
-        hasAnswerdEarly = true;
+        hasAnsweredEarly = true;
         DisplayAnswer(index);
 
         SetButtonState(false);
         timer.CancelTimer();
 
-        scoreText.text = "Score: " + scoreKeeper.CalculateScore() + "%";
+        
 
         
     }
@@ -102,11 +108,13 @@ public class Quiz : MonoBehaviour
 
             
         }
+
+        scoreText.text = "Score: " + scoreKeeper.CalculateScore() + "%";
     }
 
     void GetNextQuestion()
     {
-        if(questions.Count != 0)
+        if(questions.Count > 0)
         {
             SetButtonState(true);
             SetDefaultButtonSprites();
@@ -123,7 +131,7 @@ public class Quiz : MonoBehaviour
         int index = Random.Range(0, questions.Count);
         currentQuestion = questions[index];
 
-        if(questions.Contains(currentQuestion))
+        if (questions.Contains(currentQuestion))
         {
             questions.Remove(currentQuestion);
         }
@@ -142,7 +150,7 @@ public class Quiz : MonoBehaviour
 
     void SetButtonState(bool state)
     {
-        for(int i = 0; i < answerButtons.Length; i++)
+        for (int i = 0; i < answerButtons.Length; i++)
         {
             Button button = answerButtons[i].GetComponent<Button>();
             button.interactable = state;

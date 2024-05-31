@@ -12,6 +12,12 @@ public class Timer : MonoBehaviour
     public float fillFraction;
 
     float timerValue;
+    private void Start()
+    {
+        
+        loadNextQuestion = false; //OVA GO DODADOV TUKA BESE GRESKATA
+
+    }
     void Update()
     {
         UpdateTimer();

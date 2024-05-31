@@ -642,6 +642,7 @@ GameObject:
   - component: {fileID: 505930584}
   - component: {fileID: 505930583}
   - component: {fileID: 505930587}
+  - component: {fileID: 505930588}
   m_Layer: 5
   m_Name: Quiz Canvas
   m_TagString: Untagged
@@ -748,13 +749,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59c78512e159c8845889f350c2104371, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  questionText: {fileID: 2041492896}
   questions:
   - {fileID: 11400000, guid: a81d35d33a9e9f240a66cb4373cda9e4, type: 2}
   - {fileID: 11400000, guid: 0bac082bc7e12ba4da611106aafdf9a5, type: 2}
   - {fileID: 11400000, guid: 0a79d81d9acf2eb4cbbeb6b60acc975f, type: 2}
   - {fileID: 11400000, guid: 42f045c53c9d0664d974536a7ea25239, type: 2}
   - {fileID: 11400000, guid: 23775146cd20ee84793ff6d8e0392462, type: 2}
-  questionText: {fileID: 2041492896}
   answerButtons:
   - {fileID: 130164190}
   - {fileID: 1181624284}
@@ -767,6 +768,18 @@ MonoBehaviour:
   scoreText: {fileID: 922477980}
   progressBar: {fileID: 1795141056}
   isComplete: 0
+--- !u!114 &505930588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 505930582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88ac89f7da13f5c48b0e4f4f6dc01c57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &510884671
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2260,7 +2273,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 5
   m_WholeNumbers: 1
-  m_Value: 2
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
